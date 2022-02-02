@@ -1,0 +1,60 @@
+.current_date {
+    background: #222;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    margin: 100px auto;
+}
+
+#date, #time, #timer {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+body {
+    background: #222;
+}
+
+.text {
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 45px;
+    font-weight: 600;
+    margin-bottom: 100px;
+    
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#timer {
+    color: #fff;
+    font-size: 60px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    max-width: 1080px;
+}
+.show_date {
+    font-size: 20px;
+}
+
+#timer-days, #timer-hours, #timer-mins {
+    border-right: 1px white solid;
+    padding-right: 50px;
+    
+}
+
+#timer-hours, #timer-mins, #timer-secs {
+    margin-left: 50px;
+}
