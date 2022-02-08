@@ -11,24 +11,17 @@ const year = new Date().getFullYear()
 const dayNumber = new Date().getDate()
 
 
-document.getElementById("date").innerHTML = days[today] + ' ' + '(' + dayNumber + ' ' + months[thisMonth] + ',' + ' ' + year +'г' + ')'
+document.getElementById("date").innerHTML = `${days[today]} (${dayNumber} ${months[thisMonth]}, ${year})`
 
 
 function clock () {
 const time = new Date ()
 
-const timeNow = [time.getHours(), time.getMinutes(), time.getSeconds()]
-
-if(timeNow[0] < 10){
-    timeNow[0] = "0"+ timeNow[0]
-}
-if(timeNow[1] < 10){
-    timeNow[1] = "0"+ timeNow[1]
-}
-if(timeNow[2] < 10){
-    timeNow[2] = "0"+ timeNow[2]
-}
-
+const timeNow = [
+    time.getHours(), 
+    time.getMinutes(), 
+    time.getSeconds()
+].map(timeIs => timeIs < 10 ? "0" + timeIs : timeIs)
 
 const current_time = timeNow.join(':')
 
@@ -40,22 +33,38 @@ setTimeout(clock, 1000)
 clock()
 
 let endDate = new Date("Feb 12, 2022 12:00:00").getTime()
+
+let sixty_seconds = 1000 * 60
+let sixty_minutes = sixty_seconds * 60
+let twenty_four_hours = sixty_minutes * 24
+
+
+
+
+
 let timer = function() {
     let now = new Date().getTime()
     let t = endDate - now
     
     if (t >= 0) {
     
-        let days = Math.floor(t / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        let mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60))
-        let secs = Math.floor((t % (1000 * 60)) / 1000)
-    
-        document.getElementById("timer-days").innerHTML = days + "<div class='show_date'>дни</div>"
-        document.getElementById("timer-hours").innerHTML = ("0" + hours).slice(-2) + "<div class='show_date'>часы</div>"
-        document.getElementById("timer-mins").innerHTML = ("0" + mins).slice(-2) + "<div class='show_date'>минуты</div>"
-        document.getElementById("timer-secs").innerHTML = ("0" + secs).slice(-2) + "<div class='show_date'>секунды</div>"
-    
+        let days = Math.floor(t / twenty_four_hours);
+        let hours = Math.floor((t % twenty_four_hours) / (sixty_minutes))
+        let mins = Math.floor((t % sixty_minutes) / sixty_seconds)
+        let secs = Math.floor((t % sixty_seconds) / 1000)
+
+        let show_day = document.getElementById("timer-days")
+        show_day.innerHTML = days
+
+        let show_hours = document.getElementById("timer-hours")
+        show_hours.innerHTML = ("0" + hours).slice(-2)
+
+        let show_mins = document.getElementById("timer-mins")
+        show_mins.innerHTML = ("0" + mins).slice(-2)
+
+        let show_secs = document.getElementById("timer-secs")
+        show_secs.innerHTML = ("0" + secs).slice(-2)
+         
     } else {
         document.getElementById("timer").innerHTML = "Похоже время истекло :)"
     }
